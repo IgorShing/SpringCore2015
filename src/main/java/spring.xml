@@ -10,9 +10,18 @@
 		<constructor-arg value="John Smith"/>
 	</bean>
 	
-	
 	<bean id="consoleEventLogger" class="com.epam.spring.ConsoleEventLogger" />
+
+	<bean id="event" class="com.epam.spring.Event" scope="prototype">
+		<constructor-arg>
+			<bean class="java.util.Date"/>
+		</constructor-arg>
+		
+		<constructor-arg index= "1" ref="dateFormat"/>
+		<constructor-arg value=""/>
+	</bean>
 	
+	<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 	
 	<bean id="app" class="com.epam.spring.App">
 		<constructor-arg ref="client"/>

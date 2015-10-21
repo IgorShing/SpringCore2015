@@ -40,32 +40,14 @@ public class App
 
 	public static void main( String[] args )
 	{
-		/*		App app = new App();
-
-		app.setClient(new Client("1", "John"));
-		app.setConsoleEventLogger(new ConsoleEventLogger());
-
-		app.logEvent("I am a user /"1/"");*/
-		String fileLocation = "d:/Work/Programming/EclipseWorkspace/Workspace_JavaCore/SpringCorePr2015/SpringCore2015/src/main/java/com/epam/spring/com/epam/spring/core/spring.xml";
-
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
-		// ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:main/java/com/epam/spring/com/epam/spring/core/spring.xml");
-
-		/*	GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-
-		ctx.load("spring.xml");
-		ctx.refresh();
-		 */
-
 		App app = (App) ctx.getBean("app");
-		app.logEvent("I am a user \"1\"");
+		app.logEvent((Event) ctx.getBean("event"));
 	}
 
-	private void logEvent(String msg)
+	private void logEvent(Event event)
 	{
-		String message = msg.replaceAll(
-				client.getId(), client.getFullName());
-		consoleEventLogger.logEvent(message);
+		consoleEventLogger.logEvent(event);
 	}
 }

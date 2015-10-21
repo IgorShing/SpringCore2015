@@ -10,16 +10,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App
 {
 	private Client client;
-	private ConsoleEventLogger consoleEventLogger;
-
+	private EventLogger eventLogger;
 
 	public App() {
 	}
 
-	public App(Client client, ConsoleEventLogger consoleEventLogger)
+	public App(Client client, EventLogger eventLogger)
 	{
 		this.client = client;
-		this.consoleEventLogger = consoleEventLogger;
+		this.eventLogger = eventLogger;
 	}
 
 	public Client getClient() {
@@ -30,12 +29,12 @@ public class App
 		this.client = client;
 	}
 
-	public ConsoleEventLogger getConsoleEventLogger() {
-		return consoleEventLogger;
+	public EventLogger getEventLogger() {
+		return eventLogger;
 	}
 
-	public void setConsoleEventLogger(ConsoleEventLogger consoleEventLogger) {
-		this.consoleEventLogger = consoleEventLogger;
+	public void setEventLogger(EventLogger eventLogger) {
+		this.eventLogger = eventLogger;
 	}
 
 	public static void main( String[] args )
@@ -43,11 +42,16 @@ public class App
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
 		App app = (App) ctx.getBean("app");
-		app.logEvent((Event) ctx.getBean("event"));
+		Event event = (Event) ctx.getBean("event");
+
+		event.setMsg("Start application");
+		app.logEvent(event);
+		event.setMsg("End application");
+		app.logEvent(event);
 	}
 
 	private void logEvent(Event event)
 	{
-		consoleEventLogger.logEvent(event);
+		eventLogger.logEvent(event);
 	}
 }

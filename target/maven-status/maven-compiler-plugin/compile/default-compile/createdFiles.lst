@@ -1,0 +1,5 @@
+com\epam\spring\Client.class
+com\epam\spring\App.class
+com\epam\spring\ConsoleEventLogger.class
+com\epam\spring\Event.class
+com\epam\spring\EventLogger.class

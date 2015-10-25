@@ -25,7 +25,7 @@
 	
 	<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 	
-	<bean id="app" class="com.epam.spring.App">
+	<bean id="instance" class="com.epam.spring.App">
 		<constructor-arg ref="client"/>
 		<!-- <constructor-arg ref="consoleEventLogger"/> -->
 	    <!-- <constructor-arg ref="fileEventLogger"/> -->
@@ -36,5 +36,20 @@
 	    		<entry key = "ERROR" value-ref = "combinedEventLogger" />
 	    	</map>
 	    </constructor-arg>
+	</bean>
+	
+	<bean id = "bank" class = "com.epam.spring.Bank">
+		<property name="id" value = "45"/>
+		<property name="name" value = "DMC"/>
+		
+		<property name="bankAttributes">
+			<props>
+				<prop key = "country">USA</prop>
+				<prop key = "city">New York</prop>
+				<prop key = "street">Av 5</prop>
+				<prop key = "staff">3800</prop>
+				<prop key = "asset">9000000</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

@@ -7,10 +7,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
-	private final static EventLogger	DEFAULT_LOGGER	= new ConsoleEventLogger();
-	private Client	                    client;
-	private EventLogger	                eventLogger;
-	private Map<EventType, EventLogger>	loggers;
+	private final static EventLogger	          DEFAULT_LOGGER	= new ConsoleEventLogger();
+	private Client	                              client;
+	private EventLogger	                          eventLogger;
+	private Map<EventType, EventLogger>	          loggers;
+
+	private static ConfigurableApplicationContext	ctx	         = new ClassPathXmlApplicationContext(
+	                                                                     "spring.xml");
+	private static App	                          instance;
 
 	public App() {
 	}
@@ -47,10 +51,24 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-		        "spring.xml");
+		instance = (App) ctx.getBean("instance");
+		instance.testBank();
 
-		App app = (App) ctx.getBean("app");
+		ctx.close();
+	}
+
+	private void testBank() {
+
+		Bank bank = (Bank) ctx.getBean("bank");
+		System.out.println(bank.getBankAttributes().get("country"));
+		System.out.println(bank.getBankAttributes().get("city"));
+		System.out.println(bank.getBankAttributes().get("street"));
+		System.out.println(bank.getBankAttributes().get("staff"));
+		System.out.println(bank.getBankAttributes().get("asset"));
+
+	}
+
+	private void testLoggers() {
 		Event event = (Event) ctx.getBean("event");
 		Event event2 = (Event) ctx.getBean("event");
 
@@ -58,11 +76,10 @@ public class App {
 
 		// Get loggers
 
-		app.logEvent(event2, EventType.ERROR);
-		app.logEvent(event2, EventType.INFO);
-		app.logEvent(event2, null);
+		instance.logEvent(event2, EventType.ERROR);
+		instance.logEvent(event2, EventType.INFO);
+		instance.logEvent(event2, null);
 
-		ctx.close();
 	}
 
 	public void logEvent(Event event, EventType eventType) {

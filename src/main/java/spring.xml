@@ -16,6 +16,12 @@
 	<bean id="fileEventLogger" class="com.epam.spring.FileEventLogger" init-method = "init">
 		<constructor-arg value="logs.txt"/>
 	</bean> 
+	
+	<bean id="cacheFileEventLogger" class="com.epam.spring.CacheFileEventLogger" 
+		      init-method = "init" destroy-method = "destroy">
+		<constructor-arg value="logs.txt"/>
+	</bean> 
+	
 
 	<bean id="event" class="com.epam.spring.Event" scope="prototype">
 		<constructor-arg>
@@ -31,7 +37,10 @@
 	<bean id="app" class="com.epam.spring.App">
 		<constructor-arg ref="client"/>
 		<!-- <constructor-arg ref="consoleEventLogger"/> -->
-		<constructor-arg ref="fileEventLogger"/>
+	    <!-- <constructor-arg ref="fileEventLogger"/> -->
+	    <constructor-arg ref="cacheFileEventLogger"/>
+	
+	
 	</bean>
 
 </beans>

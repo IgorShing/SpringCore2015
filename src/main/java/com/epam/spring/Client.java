@@ -2,8 +2,8 @@ package com.epam.spring;
 
 public class Client {
 
-	private String id;
-	private String fullName;
+	private String	id;
+	private String	fullName;
 
 	public Client(String id, String fullName) {
 		this.id = id;
@@ -25,5 +25,4 @@ public class Client {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
 }

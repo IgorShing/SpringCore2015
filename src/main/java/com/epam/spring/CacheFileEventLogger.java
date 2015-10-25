@@ -5,11 +5,12 @@ import java.util.List;
 
 public class CacheFileEventLogger extends FileEventLogger {
 
-	private int	        maxCacheSize	= 5;
-	private List<Event>	cache	     = new ArrayList<Event>();
+	private int	        maxCacheSize;
+	private List<Event>	cache	= new ArrayList<Event>();
 
-	public CacheFileEventLogger(String filename) {
+	public CacheFileEventLogger(String filename, int maxCacheSize) {
 		super(filename);
+		this.maxCacheSize = maxCacheSize;
 	}
 
 	@Override

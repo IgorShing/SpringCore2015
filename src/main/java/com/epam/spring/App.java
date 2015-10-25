@@ -52,9 +52,18 @@ public class App {
 
 	public static void main(String[] args) {
 		instance = (App) ctx.getBean("instance");
-		instance.testBank();
+		// instance.testBank();
+
+		instance.testUser();
 
 		ctx.close();
+	}
+
+	private void testUser() {
+		User user = (User) ctx.getBean("user");
+		System.out.println(user.getId());
+		System.out.println(user.getUserName());
+		System.out.println(user.getGreeting());
 	}
 
 	private void testBank() {

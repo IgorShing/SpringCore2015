@@ -33,19 +33,18 @@ public class App {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"spring.xml");
+		        "spring.xml");
 
 		App app = (App) ctx.getBean("app");
 		Event event = (Event) ctx.getBean("event");
 
+		Client client = (Client) ctx.getBean("client");
+
 		event.setMsg("Start application");
 
-		app.logEvent(event);
-		app.logEvent(event);
-		app.logEvent(event);
-		app.logEvent(event);
-		app.logEvent(event);
-		app.logEvent(event);
+		Event event2 = (Event) ctx.getBean("event");
+		event2.setMsg(client.toString());
+		app.logEvent(event2);
 
 		event.setMsg("End application");
 		app.logEvent(event);

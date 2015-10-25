@@ -1,7 +1,5 @@
-Start application
-Start application
-Start application
-Start application
-Start application
+
 End application
+End application
+Client [id=45689, fullName=John Smith, greeting=Mr.]
 End application

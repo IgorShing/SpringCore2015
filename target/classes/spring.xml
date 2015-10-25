@@ -8,22 +8,12 @@
  	<import resource = "loggers.xml" />
 
 	<bean id="client" class="com.epam.spring.Client">
+		<property name = "greeting" value = "Mr."/>
 		<constructor-arg value="1"/>
 		<constructor-arg value="John Smith"/>
+		<property name = "id" value = "45689"/>
 	</bean>
 	
-	<bean id="consoleEventLogger" class="com.epam.spring.ConsoleEventLogger" lazy-init = "true"/>
-	
-	<!-- Bean for logger to file -->
-	<bean id="fileEventLogger" class="com.epam.spring.FileEventLogger" init-method = "init">
-		<constructor-arg value="logs.txt"/>
-	</bean> 
-	
-	<bean id="cacheFileEventLogger" class="com.epam.spring.CacheFileEventLogger" 
-		      init-method = "init" destroy-method = "destroy" parent = "fileEventLogger">
-		<constructor-arg value="5"/>
-	</bean> 
-
 	<bean id="event" class="com.epam.spring.Event" scope="prototype">
 		<constructor-arg>
 			<bean class="java.util.Date"/>

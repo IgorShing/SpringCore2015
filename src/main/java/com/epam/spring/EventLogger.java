@@ -2,5 +2,5 @@ package com.epam.spring;
 
 public interface EventLogger {
 
-	void logEvent(Event event);
+	void logEvent(Event event, EventType eventType);
 }

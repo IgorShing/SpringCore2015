@@ -7,6 +7,7 @@ public class CacheFileEventLogger extends FileEventLogger {
 
 	private int	        maxCacheSize;
 	private List<Event>	cache	= new ArrayList<Event>();
+	private EventType	eventType;
 
 	public CacheFileEventLogger(String filename, int maxCacheSize) {
 		super(filename);
@@ -14,9 +15,11 @@ public class CacheFileEventLogger extends FileEventLogger {
 	}
 
 	@Override
-	public void logEvent(Event event) {
+	public void logEvent(Event event, EventType eventType) {
 
+		this.eventType = eventType;
 		cache.add(event);
+
 		if (cache.size() == maxCacheSize) {
 			writeEventsFromCache();
 			cache.clear();
@@ -31,8 +34,7 @@ public class CacheFileEventLogger extends FileEventLogger {
 
 	private void writeEventsFromCache() {
 		for (Event event : cache) {
-			super.logEvent(event);
+			super.logEvent(event, eventType);
 		}
 	}
-
 }

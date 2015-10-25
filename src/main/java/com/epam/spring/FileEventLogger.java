@@ -30,7 +30,9 @@ public class FileEventLogger implements EventLogger {
 		}
 	}
 
-	public void logEvent(Event event) {
+	public void logEvent(Event event, EventType eventType) {
+
+		System.out.println("FileEventLogger");
 		try {
 			FileUtils.writeStringToFile(file, event.getMsg() + "\n", append);
 		} catch (IOException e) {

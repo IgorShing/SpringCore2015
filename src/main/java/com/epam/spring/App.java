@@ -13,14 +13,14 @@ public class App {
 	private Map<EventType, EventLogger>	          loggers;
 
 	private static ConfigurableApplicationContext	ctx	         = new ClassPathXmlApplicationContext(
-	                                                                     "spring.xml");
+			"spring.xml");
 	private static App	                          instance;
 
 	public App() {
 	}
 
 	public App(Client client, EventLogger eventLogger,
-	        Map<EventType, EventLogger> loggers) {
+			Map<EventType, EventLogger> loggers) {
 		this.client = client;
 		this.eventLogger = eventLogger;
 		this.loggers = loggers;
@@ -52,7 +52,7 @@ public class App {
 
 	public static void main(String[] args) {
 		instance = (App) ctx.getBean("instance");
-		// instance.testBank();
+		instance.testBank();
 
 		instance.testUser();
 
